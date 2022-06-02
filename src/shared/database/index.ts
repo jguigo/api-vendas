@@ -1,14 +1,16 @@
+import "dotenv/config"
 import { Sequelize } from "sequelize";
 
-const DB_NAME = "apivendas";
-const DB_USER = "root";
-const DB_PASS = "root";
-
-let db = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
-   dialect: "mysql",
-   host: "localhost",
-   port: 3306,
-});
+let db = new Sequelize(
+   process.env.DB_NAME as string,
+   process.env.DB_USER as string,
+   process.env.DB_PWD as string,
+   {
+      dialect: "mysql",
+      host: process.env.DB_HOST as string,
+      port: parseInt(process.env.DB_PORT as string),
+   }
+);
 
 async function hasConnection() {
    try {
